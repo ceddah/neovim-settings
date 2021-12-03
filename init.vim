@@ -33,17 +33,13 @@ set termguicolors
 syntax enable
 colorscheme cobalt2
 
-" NERDTree toggle CTRL + T
 nnoremap <C-f> :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-l> :call CocActionAsync('jumpDefinition')<CR>
 nmap <F8> :TagbarToggle<CR>
-" Fuzzy Finder CTRL + P
 nnoremap <C-p> :FZF<CR>
-" Confirm autocomplete with Tab
-inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
-" Moving between open panels with ALT + H-J-K-L
+"inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
 tnoremap <A-h> <C-\><C-n><C-w>h
 tnoremap <A-j> <C-\><C-n><C-w>j
 tnoremap <A-k> <C-\><C-n><C-w>k
@@ -52,6 +48,18 @@ nnoremap <A-h> <C-w>h
 nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
