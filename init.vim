@@ -33,13 +33,17 @@ set termguicolors
 syntax enable
 colorscheme cobalt2
 
+" NERDTree toggle CTRL + T
 nnoremap <C-f> :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-l> :call CocActionAsync('jumpDefinition')<CR>
 nmap <F8> :TagbarToggle<CR>
+" Fuzzy Finder CTRL + P
 nnoremap <C-p> :FZF<CR>
+" Confirm autocomplete with Tab
 inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
+" Moving between open panels with ALT + H-J-K-L
 tnoremap <A-h> <C-\><C-n><C-w>h
 tnoremap <A-j> <C-\><C-n><C-w>j
 tnoremap <A-k> <C-\><C-n><C-w>k
